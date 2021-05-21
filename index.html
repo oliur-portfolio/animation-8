@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Animation Effect</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet" />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            ::selection {
+                background: #fff;
+                color: #000;
+            }
+
+            body {
+                height: 100vh;
+                line-height: 1.1;
+                background: #000;
+                text-transform: uppercase;
+                font-family: "Roboto", sans-serif;
+                position: relative;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            .animation-area {
+                margin-right: 15vw;
+            }
+
+            .main-text h2 {
+                font-size: 70px;
+                color: #fff;
+                text-align: right;
+                transform: scale(1.06);
+            }
+
+            .main-text h2 span {
+                display: inline-block;
+            }
+
+            @media only screen and (max-width: 1199px) {
+                .main-text h2 {
+                    font-size: 60px;
+                }
+            }
+
+            @media only screen and (max-width: 991px) {
+                .main-text h2 {
+                    font-size: 45px;
+                }
+            }
+
+            @media only screen and (max-width: 767px) {
+                .main-text h2 {
+                    font-size: 36px;
+                    line-height: 1.2;
+                }
+            }
+
+            @media only screen and (max-width: 575px) {
+                .animation-area {
+                    margin-right: 20vw;
+                }
+
+                .main-text h2 {
+                    font-size: 28px;
+                }
+            }
+
+            @media only screen and (max-width: 400px) {
+                .main-text h2 {
+                    font-size: 22px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Main Animation -->
+        <div class="animation-area">
+            <div class="main-text">
+                <h2>
+                    <span class="upper same-word">Professionally</span>
+                </h2>
+                <h2>
+                    <span class="lower same-word">Animated</span>
+                    <span class="first-bottom same-word">Scenes</span>
+                </h2>
+            </div>
+        </div>
+        <!-- Main Animation -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+
+        <script>
+            // First Delay Before Start Animation
+            var startDelay = "0.8";
+
+            // Word 1 duration time
+            var duration1 = "0.4";
+
+            // Word 2 duration time
+            var duration2 = "0.2";
+
+            // Word 3 duration time
+            var duration3 = "0.2";
+
+            // Word 4 duration time
+            var duration4 = "0.4";
+
+            // Start Word 2 animation before Word 1 animation complete
+            var animationBefore1 = "-=0.08";
+
+            // Start Word 3 animation before Word 2 animation complete
+            var animationBefore2 = "-=0.09";
+
+            // Each Word moving animation speed
+            var wordSpeed = "0.1";
+
+            var animation1 = gsap.timeline({
+                delay: startDelay,
+            });
+
+            animation1.from(".first-bottom", {
+                duration: duration1,
+                opacity: 0,
+                y: -20,
+            }),
+                animation1.from(
+                    ".upper",
+                    {
+                        duration: duration2,
+                        opacity: 0,
+                        y: -15,
+                    },
+                    animationBefore1
+                ),
+                animation1.from(
+                    ".lower",
+                    {
+                        duration: duration3,
+                        opacity: 0,
+                        y: 15,
+                    },
+                    animationBefore2
+                ),
+                animation1.to(".same-word", {
+                    duration: duration4,
+                    opacity: 1,
+                    x: 20,
+                    stagger: wordSpeed,
+                });
+
+            // Restart Function
+            window.restart = function () {
+                animation1.restart();
+            };
+        </script>
+    </body>
+</html>
